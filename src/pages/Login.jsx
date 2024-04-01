@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Login = ({ userList, setLoggedWith }) => {
-  const [user, setUser] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [invalidLogin, setInvalidLogin] = React.useState(false);
   const goTo = useNavigate();
@@ -15,7 +15,7 @@ const Login = ({ userList, setLoggedWith }) => {
 
     if (userList) {
       matchedUser = userList.filter((item) => {
-        return item.user === user;
+        return item.user === username;
       });
 
       if (matchedUser.length === 1) {
@@ -41,9 +41,9 @@ const Login = ({ userList, setLoggedWith }) => {
         <label htmlFor="user">Usuário</label>
         <input
           type="text"
-          id="user"
-          value={user}
-          onChange={(event) => setUser(event.target.value.trim())}
+          id="username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value.trim())}
           required
         />
 

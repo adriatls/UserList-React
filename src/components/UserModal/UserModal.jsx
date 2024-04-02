@@ -2,8 +2,9 @@ import React from "react";
 import Modal from "react-modal";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
-import UserForm from "./UseForm/UserForm";
-import { isNotEmptyObj } from "../utils/isNotEmptyObj";
+import UserForm from "../UserForm/UserForm";
+import { isNotEmptyObj } from "../../utils/isNotEmptyObj";
+import { CloseButton, Content, ModalHeader } from "./Styled";
 
 const UserModal = ({
   userList,
@@ -11,10 +12,10 @@ const UserModal = ({
   modalIsOpen,
   setModalIsOpen,
   action,
-  user
+  user,
 }) => {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [invalidUser, setInvalidUser] = React.useState(false);
   const [completedAction, setCompletedAction] = React.useState(false);
   const [invalidActionMessage, setInvalidActionMessage] = React.useState("");
@@ -35,13 +36,13 @@ const UserModal = ({
     setInvalidActionMessage(errorMessage);
     setInvalidUser(true);
     setCompletedAction(false);
-  }
+  };
 
   const setSuccess = (newList) => {
     setUserList(newList);
     setCompletedAction(true);
     setInvalidUser(false);
-  }
+  };
 
   const isUsernameAvailable = (userList, username) => {
     const matchedUser = userList.filter((item) => item.user === username);
@@ -76,17 +77,21 @@ const UserModal = ({
       password,
     };
 
-    const userPosition = userList.findIndex((item) => item.id === updatedUser.id);
+    const userPosition = userList.findIndex(
+      (item) => item.id === updatedUser.id
+    );
 
     if (userPosition === -1) {
       setError("Ocorreu um erro ao salvar as modificações!");
     } else {
-      const filteredList = userList.filter((item) => item.id !== updatedUser.id)
+      const filteredList = userList.filter(
+        (item) => item.id !== updatedUser.id
+      );
 
       if (isUsernameAvailable(filteredList, updatedUser.user)) {
         let updatedList = [...userList];
         updatedList[userPosition] = updatedUser;
-        setSuccess(updatedList)
+        setSuccess(updatedList);
       } else {
         setError("Já existe usuário com esse nome!");
       }
@@ -121,22 +126,33 @@ const UserModal = ({
       onRequestClose={handleModalClose}
       contentLabel="Modal de exemplo"
       appElement={document.getElementById("root") || undefined}
+      style={{
+        content: {
+          width: "fit-content",
+          height: "fit-content",
+          margin: '10% auto'
+        },
+      }}
     >
-      <p>{actionOption[action].title}</p>
-      <button type="button" onClick={handleModalClose}>
-        Fechar
-      </button>
-      {invalidUser && <p>{invalidActionMessage}</p>}
-      {completedAction && <p>{actionOption[action].successMessage}</p>}
+      <Content>
+        <ModalHeader>
+          <p>{actionOption[action].title}</p>
+          <CloseButton type="button" onClick={handleModalClose}>
+            x
+          </CloseButton>
+        </ModalHeader>
+        {invalidUser && <p>{invalidActionMessage}</p>}
+        {completedAction && <p>{actionOption[action].successMessage}</p>}
 
-      <UserForm
-        username={username}
-        setUsername={setUsername}
-        password={password}
-        setPassword={setPassword}
-        handleSubmit={actionOption[action].handleSubmit}
-        buttonLabel={actionOption[action].buttonLabel}
-      />
+        <UserForm
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+          handleSubmit={actionOption[action].handleSubmit}
+          buttonLabel={actionOption[action].buttonLabel}
+        />
+      </Content>
     </Modal>
   );
 };

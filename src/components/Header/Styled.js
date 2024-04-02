@@ -28,6 +28,10 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Img = styled.img`

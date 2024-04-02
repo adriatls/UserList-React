@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import UserForm from "../../components/UseForm/UserForm";
+import UserForm from "../../components/UserForm/UserForm";
 import { LoginContainer } from "./Styled";
 
 const Login = ({ userList, setLoggedWith }) => {

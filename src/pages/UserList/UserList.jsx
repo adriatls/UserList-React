@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { formatDate } from "../utils/formatDate";
-import UserModal from "../components/UserModal";
+import { formatDate } from "../../utils/formatDate";
+import UserModal from "../../components/UserModal/UserModal";
 
 const UserList = ({ userList, setUserList, loggedWith }) => {
   const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);

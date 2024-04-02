@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import UserList from "./pages/UserList";
+import UserList from "./pages/UserList/UserList";
 import Login from "./pages/Login/Login";
 import Error from "./pages/Error";
 import useLocalStorage from "./hooks/useLocalStorage";

@@ -118,6 +118,11 @@ const UserModal = ({
     setCompletedAction(false);
     setModalIsOpen(false);
     clearInputs();
+
+    if(action === 'update' && user && isNotEmptyObj(user)) {
+      setUsername(user.user);
+      setPassword(user.password);
+    }
   };
 
   return (

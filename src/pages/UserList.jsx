@@ -1,68 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { formatDate } from "../utils/formatDate";
-import { v4 as uuidv4 } from "uuid";
+import UserModal from "../components/UserModal";
 
 const UserList = ({ userList, setUserList, loggedWith }) => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [invalidNewUser, setInvalidNewUser] = React.useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = React.useState(false);
+  const [userToEdit, setUserToEdit] = React.useState(new Object());
 
-  const isUsernameAvailable = (username) => {
-    const matchedUser = userList.filter((item) => item.user === username);
-    return matchedUser.length == 0;
-  };
-
-  const handleCreateNewUser = (event) => {
-    event.preventDefault();
-
-    if (isUsernameAvailable(username)) {
-      setUserList([
-        ...userList,
-        {
-          id: uuidv4(),
-          user: username,
-          password,
-          createdAt: Date.now(),
-        },
-      ]);
-      setInvalidNewUser(false);
-      setUsername("");
-      setPassword("");
-    } else {
-      setInvalidNewUser(true);
-    }
-  };
-
-  const handleDelete = (id) => {
+  const handleDeleteUser = (id) => {
     const filteredUsers = userList.filter((item) => item.id !== id);
     setUserList(filteredUsers);
   };
 
+  const handleUpdateModal = (user) => {
+    setUserToEdit(user);
+    setIsUpdateModalOpen(true);
+  };
+
   return (
     <div>
-      <form onSubmit={handleCreateNewUser}>
-        {invalidNewUser && <p>Já existe usuário com esse nome!</p>}
-        <label htmlFor="user">Usuário</label>
-        <input
-          type="text"
-          id="user"
-          value={username}
-          onChange={(event) => setUsername(event.target.value.trim())}
-          required
-        />
-
-        <label htmlFor="password">Senha</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value.trim())}
-          required
-        />
-
-        <button type="submit">Criar</button>
-      </form>
+      <button onClick={() => setIsCreateModalOpen(true)}>
+        Criar novo usuário
+      </button>
+      <UserModal
+        userList={userList}
+        setUserList={setUserList}
+        modalIsOpen={isCreateModalOpen}
+        setModalIsOpen={setIsCreateModalOpen}
+        action="create"
+      />
       <br />
       <br />
       {userList.map((item) => {
@@ -71,19 +38,36 @@ const UserList = ({ userList, setUserList, loggedWith }) => {
             <span>Nome: {item.user} </span>
             <span>Senha: {item.password} </span>
             <span>Usuário criado em: {formatDate(item.createdAt)} </span>
-            <button>Editar</button>
-            <button onClick={() => handleDelete(item.id)} disabled={loggedWith.id === item.id}>Excluir</button>
+            <button
+              onClick={() => handleUpdateModal(item)}
+            >
+              Editar
+            </button>
+            <button
+              onClick={() => handleDeleteUser(item.id)}
+              disabled={loggedWith.id === item.id}
+            >
+              Excluir
+            </button>
           </div>
         );
       })}
+      <UserModal
+        userList={userList}
+        setUserList={setUserList}
+        modalIsOpen={isUpdateModalOpen}
+        setModalIsOpen={setIsUpdateModalOpen}
+        action="update"
+        user={userToEdit}
+      />
     </div>
   );
 };
 
 UserList.propTypes = {
-  userList: PropTypes.array,
-  setUserList: PropTypes.func,
-  loggedWith: PropTypes.object,
+  userList: PropTypes.array.isRequired,
+  setUserList: PropTypes.func.isRequired,
+  loggedWith: PropTypes.object.isRequired,
 };
 
 export default UserList;

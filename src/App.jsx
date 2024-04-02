@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Error from "./pages/Error";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { defaultUser } from "./utils/defaultUser";
-import { isAuthenticated } from "./utils/isAuthenticated";
+import { isNotEmptyObj } from "./utils/isNotEmptyObj";
 
 function App() {
   const [userList, setUserList] = useLocalStorage("users", [defaultUser]);
@@ -17,7 +17,7 @@ function App() {
         <Route
           path="login"
           element={
-            isAuthenticated(loggedWith) ? (
+            isNotEmptyObj(loggedWith) ? (
               <Navigate to="/" />
             ) : (
               <Login userList={userList} setLoggedWith={setLoggedWith} />
@@ -27,7 +27,7 @@ function App() {
         <Route
           path="/"
           element={
-            isAuthenticated(loggedWith) ? (
+            isNotEmptyObj(loggedWith) ? (
               <UserList
                 userList={userList}
                 setUserList={setUserList}

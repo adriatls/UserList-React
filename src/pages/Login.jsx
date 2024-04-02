@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import UserForm from "../components/UserForm";
 
 const Login = ({ userList, setLoggedWith }) => {
   const [username, setUsername] = React.useState("");
@@ -26,6 +27,8 @@ const Login = ({ userList, setLoggedWith }) => {
     if (isValidUser) {
       goTo("/");
       setLoggedWith(matchedUser[0]);
+      setUsername('');
+      setPassword('');
     } else {
       setInvalidLogin(true);
     }
@@ -33,38 +36,25 @@ const Login = ({ userList, setLoggedWith }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <p>Entre na sua conta</p>
+      <p>Entre na sua conta</p>
 
-        {invalidLogin && <p>Usuário ou senha inválidos</p>}
+      {invalidLogin && <p>Usuário ou senha inválidos</p>}
 
-        <label htmlFor="user">Usuário</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value.trim())}
-          required
-        />
-
-        <label htmlFor="password">Senha</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value.trim())}
-          required
-        />
-
-        <button type="submit">Entrar</button>
-      </form>
+      <UserForm
+        username={username}
+        setUsername={setUsername}
+        password={password}
+        setPassword={setPassword}
+        handleSubmit={handleSubmit}
+        buttonLabel={"Entrar"}
+      />
     </div>
   );
 };
 
 Login.propTypes = {
-  userList: PropTypes.array,
-  setLoggedWith: PropTypes.func,
+  userList: PropTypes.array.isRequired,
+  setLoggedWith: PropTypes.func.isRequired,
 };
 
 export default Login;

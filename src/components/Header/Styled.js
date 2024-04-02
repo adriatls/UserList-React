@@ -11,7 +11,6 @@ export const HeaderContainer = styled.header`
 
   h1 {
     color: #ffffff;
-    font-family: "Open Sans";
   }
 `;
 

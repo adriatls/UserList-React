@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import UserForm from "../components/UserForm";
+import UserForm from "../../components/UseForm/UserForm";
+import { LoginContainer } from "./Styled";
 
 const Login = ({ userList, setLoggedWith }) => {
   const [username, setUsername] = React.useState("");
@@ -35,7 +36,7 @@ const Login = ({ userList, setLoggedWith }) => {
   };
 
   return (
-    <div>
+    <LoginContainer>
       <p>Entre na sua conta</p>
 
       {invalidLogin && <p>Usuário ou senha inválidos</p>}
@@ -48,7 +49,7 @@ const Login = ({ userList, setLoggedWith }) => {
         handleSubmit={handleSubmit}
         buttonLabel={"Entrar"}
       />
-    </div>
+    </LoginContainer>
   );
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
-import UserForm from "./UserForm";
+import UserForm from "./UseForm/UserForm";
 import { isNotEmptyObj } from "../utils/isNotEmptyObj";
 
 const UserModal = ({

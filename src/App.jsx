@@ -6,6 +6,8 @@ import Error from "./pages/Error";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { defaultUser } from "./utils/defaultUser";
 import { isNotEmptyObj } from "./utils/isNotEmptyObj";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [userList, setUserList] = useLocalStorage("users", [defaultUser]);
@@ -13,6 +15,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Header loggedWith={loggedWith} setLoggedWith={setLoggedWith} />
       <Routes>
         <Route
           path="login"
@@ -40,6 +43,7 @@ function App() {
         />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

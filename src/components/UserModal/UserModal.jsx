@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 import UserForm from "../UserForm/UserForm";
 import { isNotEmptyObj } from "../../utils/isNotEmptyObj";
-import { CloseButton, Content, ModalHeader } from "./Styled";
-
+import { CloseButton, Content, ErrorMessage, Img, ModalHeader, SucessMessage } from "./Styled";
+import fechar from "../../assets/fechar.png"
 const UserModal = ({
   userList,
   setUserList,
@@ -138,11 +138,11 @@ const UserModal = ({
         <ModalHeader>
           <p>{actionOption[action].title}</p>
           <CloseButton type="button" onClick={handleModalClose}>
-            x
+            <Img src={fechar} alt="Símbolo de fechar"/>
           </CloseButton>
         </ModalHeader>
-        {invalidUser && <p>{invalidActionMessage}</p>}
-        {completedAction && <p>{actionOption[action].successMessage}</p>}
+        {invalidUser && <ErrorMessage>{invalidActionMessage}</ErrorMessage>}
+        {completedAction && <SucessMessage>{actionOption[action].successMessage}</SucessMessage>}
 
         <UserForm
           username={username}

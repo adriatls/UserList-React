@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Content = styled.div`
-p {
+  p {
     color: #c80012;
     font-weight: 600;
     font-size: 16px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -15,12 +16,21 @@ export const ModalHeader = styled.div`
   gap: 10px;
 `;
 
+export const ErrorMessage = styled.span`
+  color: #a6303b;
+  font-size: 14px;
+  margin-bottom: 10px;
+`;
+
+export const SucessMessage = styled.span`
+  color: #12c800;
+  font-size: 14px;
+  margin-bottom: 10px;
+`;
+
 export const CloseButton = styled.button`
-  border-radius: 20px;
-  border: thin solid #c80012;
+  border: none;
   text-align: center;
-  line-height: 120%;
-  color: #c80012;
   background-color: #fff;
   align-self: flex-start;
 
@@ -28,3 +38,9 @@ export const CloseButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const Img = styled.img`
+  filter: invert(18%) sepia(82%) saturate(3900%) hue-rotate(343deg)
+    brightness(73%) contrast(124%);
+`;
+

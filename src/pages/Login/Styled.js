@@ -10,5 +10,12 @@ export const LoginContainer = styled.main`
     color: #c80012;
     font-weight: bold;
     font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  span {
+    color: #a6303b;
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 `;

@@ -39,7 +39,7 @@ const Login = ({ userList, setLoggedWith }) => {
     <LoginContainer>
       <p>Entre na sua conta</p>
 
-      {invalidLogin && <p>Usuário ou senha inválidos</p>}
+      {invalidLogin && <span>Usuário ou senha inválidos!</span>}
 
       <UserForm
         username={username}

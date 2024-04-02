@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const UserListContainer = styled.div`
-  padding: 0px 48px;
+  padding: 0px 48px 94px ;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

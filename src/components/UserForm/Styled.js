@@ -33,4 +33,5 @@ export const InputContainer = styled.div`
 
 export const Checkbox = styled.input.attrs({ type: "checkbox" })`
   accent-color: #c80012;
+  margin-right: 8px;
 `;

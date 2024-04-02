@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { formatDate } from "../../utils/formatDate";
 import UserModal from "../../components/UserModal/UserModal";
+import { Button, ButtonsContainer, List, UserInfo, UserListContainer } from "./Styled";
+import SimpleButton from "../../components/SimpleButton/SimpleButton";
 
 const UserList = ({ userList, setUserList, loggedWith }) => {
   const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
@@ -19,10 +21,10 @@ const UserList = ({ userList, setUserList, loggedWith }) => {
   };
 
   return (
-    <div>
-      <button onClick={() => setIsCreateModalOpen(true)}>
+    <UserListContainer>
+      <Button onClick={() => setIsCreateModalOpen(true)}>
         Criar novo usuário
-      </button>
+      </Button>
       <UserModal
         userList={userList}
         setUserList={setUserList}
@@ -30,28 +32,29 @@ const UserList = ({ userList, setUserList, loggedWith }) => {
         setModalIsOpen={setIsCreateModalOpen}
         action="create"
       />
-      <br />
-      <br />
-      {userList.map((item) => {
-        return (
-          <div key={item.id}>
-            <span>Nome: {item.user} </span>
-            <span>Senha: {item.password} </span>
-            <span>Usuário criado em: {formatDate(item.createdAt)} </span>
-            <button
-              onClick={() => handleUpdateModal(item)}
-            >
-              Editar
-            </button>
-            <button
-              onClick={() => handleDeleteUser(item.id)}
-              disabled={loggedWith.id === item.id}
-            >
-              Excluir
-            </button>
-          </div>
-        );
-      })}
+      <List>
+        {userList.map((item) => {
+          return (
+            <UserInfo key={item.id}>
+              <h3>{item.user} </h3>
+              <p>Usuário criado em: {formatDate(item.createdAt)} </p>
+              <ButtonsContainer>
+                <SimpleButton
+                  label="Editar"
+                  type='button'
+                  handleClick={() => handleUpdateModal(item)}
+                />
+                <SimpleButton
+                  label="Excluir"
+                  type='button'
+                  isDisabled={loggedWith.id === item.id}
+                  handleClick={() => handleDeleteUser(item.id)}
+                />
+              </ButtonsContainer>
+            </UserInfo>
+          );
+        })}
+      </List>
       <UserModal
         userList={userList}
         setUserList={setUserList}
@@ -60,7 +63,7 @@ const UserList = ({ userList, setUserList, loggedWith }) => {
         action="update"
         user={userToEdit}
       />
-    </div>
+    </UserListContainer>
   );
 };
 

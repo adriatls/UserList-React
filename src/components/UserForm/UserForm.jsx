@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Checkbox, Form, InputContainer } from "./Styled";
+import SimpleButton from "../SimpleButton/SimpleButton";
 
 const UserForm = ({
   handleSubmit,
@@ -47,7 +48,7 @@ const UserForm = ({
         Mostrar senha
       </label>
 
-      <button type="submit">{buttonLabel}</button>
+      <SimpleButton type="submit" label={buttonLabel}/>
     </Form>
   );
 };

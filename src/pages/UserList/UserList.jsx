@@ -23,7 +23,7 @@ const UserList = ({ userList, setUserList, loggedWith }) => {
   const [rearrangedList, setRearrangedList] = React.useState(new Array());
 
   React.useEffect(() => {
-    if (userList && userList.length) {
+    if (userList?.length) {
       const reorganizedList = userList
         .filter((item) => {
           return item.user.toLowerCase().includes(queryByUsername.toLocaleLowerCase());

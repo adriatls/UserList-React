@@ -16,7 +16,6 @@ const UserModal = ({
 }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [invalidUser, setInvalidUser] = React.useState(false);
   const [completedAction, setCompletedAction] = React.useState(false);
   const [invalidActionMessage, setInvalidActionMessage] = React.useState("");
 
@@ -34,14 +33,13 @@ const UserModal = ({
 
   const setError = (errorMessage) => {
     setInvalidActionMessage(errorMessage);
-    setInvalidUser(true);
     setCompletedAction(false);
   };
 
   const setSuccess = (newList) => {
     setUserList(newList);
     setCompletedAction(true);
-    setInvalidUser(false);
+    setInvalidActionMessage('');
   };
 
   const isUsernameAvailable = (userList, username) => {
@@ -57,8 +55,8 @@ const UserModal = ({
         ...userList,
         {
           id: uuidv4(),
-          user: username,
-          password,
+          user: username.trim(),
+          password: password.trim(),
           createdAt: Date.now(),
         },
       ]);
@@ -73,8 +71,8 @@ const UserModal = ({
 
     const updatedUser = {
       ...user,
-      user: username,
-      password,
+      user: username.trim(),
+      password: password.trim(),
     };
 
     const userPosition = userList.findIndex(
@@ -114,9 +112,9 @@ const UserModal = ({
   };
 
   const handleModalClose = () => {
-    setInvalidUser(false);
     setCompletedAction(false);
     setModalIsOpen(false);
+    setInvalidActionMessage('');
     clearInputs();
 
     if(action === 'update' && user && isNotEmptyObj(user)) {
@@ -146,7 +144,7 @@ const UserModal = ({
             <Img src={fechar} alt="Símbolo de fechar"/>
           </CloseButton>
         </ModalHeader>
-        {invalidUser && <ErrorMessage>{invalidActionMessage}</ErrorMessage>}
+        {invalidActionMessage && <ErrorMessage>{invalidActionMessage}</ErrorMessage>}
         {completedAction && <SucessMessage>{actionOption[action].successMessage}</SucessMessage>}
 
         <UserForm

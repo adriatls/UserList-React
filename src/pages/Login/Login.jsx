@@ -10,20 +10,27 @@ const Login = ({ userList, setLoggedWith }) => {
   const [invalidLogin, setInvalidLogin] = React.useState(false);
   const goTo = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const checkValidUser = () => {
     let isValidUser = false;
     let matchedUser = new Array();
 
     if (userList) {
       matchedUser = userList.filter((item) => {
-        return item.user === username;
+        return item.user === username.trim();
       });
 
       if (matchedUser.length === 1) {
-        isValidUser = matchedUser[0].password === password;
+        isValidUser = matchedUser[0].password === password.trim();
       }
     }
+
+    return {isValidUser, matchedUser};
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const {isValidUser, matchedUser} = checkValidUser()
 
     if (isValidUser) {
       goTo("/");

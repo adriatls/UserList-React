@@ -21,7 +21,7 @@ const UserForm = ({
           type="text"
           id="username"
           value={username || ""}
-          onChange={(event) => setUsername(event.target.value.trim())}
+          onChange={(event) => setUsername(event.target.value)}
           placeholder="Nome"
           required
         />
@@ -33,7 +33,7 @@ const UserForm = ({
           type={showPassword ? "text" : "password"}
           id="password"
           value={password || ""}
-          onChange={(event) => setPassword(event.target.value.trim())}
+          onChange={(event) => setPassword(event.target.value)}
           placeholder="*****"
           required
         />

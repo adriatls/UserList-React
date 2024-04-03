@@ -17,6 +17,11 @@ export const InputContainer = styled.div`
     font-size: 16px;
     line-height: 160%;
     color: #2d2d2d;
+
+    &:after {
+      content: "*";
+      color: #c80012;
+    }
   }
 
   input {

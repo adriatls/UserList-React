@@ -1,6 +1,6 @@
 <h1 align="center" id="top" border="none"> 👩‍💻 Lista de Usuários - React</h1>
 
-<!--### Netlify link: <a href="https://stunning-genie-4720d6.netlify.app/" target="_blank" title="acess project">SPA</a>-->
+### Netlify link: <a href="https://userlistreact.netlify.app" target="_blank" title="acess project">userlistreact</a>
 
 <div align="center">
 <a href="#sobre">Sobre</a> | <a href="#requisitos">Requisitos</a> | <a href="#opcionais">Opcionais feito</a> | <a href='#backlog'>Backlog</a> | <a href='#run'>Rodar aplicação</a> | <a href='#preview'>Preview</a> 
@@ -71,7 +71,7 @@ npm run dev
 
 ## <h2 id="preview">💻 Preview<h2>
 
-
+![teste](https://github.com/adriatls/UserList-React/assets/71045022/24d7123a-8b60-4494-8359-8ca6c93d4d69)
 
 ___________________________________
 <a href='#top'>Voltar ao topo</a>
